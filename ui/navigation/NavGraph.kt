@@ -1,4 +1,4 @@
-package com.example.petshop.ui.navigation
+package com.example.portrasdobalcao.ui.navigation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,6 +31,6 @@ private fun PlaceholderScreen() {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Petshop App")
+        Text(text = "Por Trás do Balcão")
     }
 }
