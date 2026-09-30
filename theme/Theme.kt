@@ -1,4 +1,4 @@
-package com.example.petshop.ui.theme
+package com.example.portrasdobalcao.ui.theme
 
 import android.app.Activity
 import android.os.Build
