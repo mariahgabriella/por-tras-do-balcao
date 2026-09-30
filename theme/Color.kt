@@ -1,4 +1,4 @@
-package com.example.petshop.ui.theme
+package com.example.portrasdobalcao.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
