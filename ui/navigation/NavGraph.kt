@@ -1,15 +1,12 @@
 package com.example.portrasdobalcao.ui.navigation
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.portrasdobalcao.ui.features.about.AboutScreen
+import com.example.portrasdobalcao.ui.features.splash.SplashScreen
 
 @Composable
 fun NavGraph(
@@ -17,20 +14,24 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = NavTarget.Home.route
+        startDestination = NavTarget.Splash.route
     ) {
-        composable(NavTarget.Home.route) {
-            PlaceholderScreen()
+        composable(NavTarget.Splash.route) {
+            SplashScreen(
+                onSplashFinished = {
+                    navController.navigate(NavTarget.About.route) {
+                        popUpTo(NavTarget.Splash.route) { inclusive = true }
+                    }
+                }
+            )
         }
-    }
-}
 
-@Composable
-private fun PlaceholderScreen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = "Por Trás do Balcão")
+        composable(NavTarget.About.route) {
+            AboutScreen()
+        }
+
+        composable(NavTarget.Home.route) {
+            AboutScreen()
+        }
     }
 }
