@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -13,6 +14,8 @@ import com.example.portrasdobalcao.ui.features.about.AboutScreen
 import com.example.portrasdobalcao.ui.features.login.LoginScreen
 import com.example.portrasdobalcao.ui.features.perfil.PerfilScreen
 import com.example.portrasdobalcao.ui.features.splash.SplashScreen
+import com.example.portrasdobalcao.ui.screen.EstoqueScreen
+import com.seuprojeto.ui.viewmodel.EstoqueViewModel
 
 @Composable
 fun NavGraph(
@@ -64,6 +67,16 @@ fun NavGraph(
                     navController.navigate(NavTarget.Login.route) {
                         popUpTo(NavTarget.Perfil.route) { inclusive = true }
                     }
+                }
+            )
+        }
+
+        composable(NavTarget.Estoque.route) {
+            val viewModel: EstoqueViewModel = viewModel()
+            EstoqueScreen(
+                viewModel = viewModel,
+                onVoltar = {
+                    navController.popBackStack()
                 }
             )
         }
