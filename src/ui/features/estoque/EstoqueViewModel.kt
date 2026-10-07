@@ -1,4 +1,4 @@
-package com.seuprojeto.ui.viewmodel // TROQUE pelo pacote real do projeto
+package com.example.portrasdobalcao.ui.features.estoque
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
