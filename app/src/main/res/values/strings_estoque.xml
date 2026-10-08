@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Estoque -->
+    <string name="estoque_titulo">Estoque</string>
+    <string name="estoque_filtro_baixo">Só estoque baixo</string>
+    <string name="estoque_vazio">Nenhum produto no estoque ainda.</string>
+    <string name="estoque_vazio_filtro">Nenhum produto com estoque baixo.</string>
+    <string name="estoque_atual">Atual: %1$d</string>
+    <string name="estoque_minima">Mínima: %1$d</string>
+    <string name="estoque_entrada">Entrada</string>
+    <string name="estoque_saida">Saída</string>
+    <string name="estoque_campo_quantidade">Quantidade</string>
+    <string name="estoque_saldo_antes">Saldo antes</string>
+    <string name="estoque_saldo_depois">Saldo depois</string>
+    <string name="estoque_confirmar">Confirmar</string>
+    <string name="estoque_sucesso">Movimentação registrada.</string>
+    <string name="estoque_qtd_invalida">Informe uma quantidade maior que zero.</string>
+    <string name="estoque_insuficiente_um">Estoque insuficiente: resta %1$d unidade</string>
+    <string name="estoque_insuficiente_outros">Estoque insuficiente: restam %1$d unidades</string>
+    <string name="estoque_erro">Não foi possível registrar a movimentação. Tente novamente.</string>
+</resources>
