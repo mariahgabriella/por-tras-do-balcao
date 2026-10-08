@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.portrasdobalcao.data.AppDatabase
 import com.example.portrasdobalcao.data.local.SessaoManager
 import com.example.portrasdobalcao.data.local.TemaPreferences
+import com.example.portrasdobalcao.data.repository.EstoqueRepository
 import com.example.portrasdobalcao.data.repository.ProdutoRepository
 import com.example.portrasdobalcao.data.repository.UsuarioRepository
 
@@ -17,6 +18,7 @@ class AppContainer private constructor(context: Context) {
 
     val usuarioRepository = UsuarioRepository(db.usuarioDao(), app)
     val produtoRepository = ProdutoRepository(db)
+    val estoqueRepository = EstoqueRepository(db.estoqueDao())
     val temaPreferences = TemaPreferences(app)
     val sessaoManager = SessaoManager(app)
 

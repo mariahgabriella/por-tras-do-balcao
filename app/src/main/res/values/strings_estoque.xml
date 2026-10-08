@@ -1,0 +1,8 @@
+<resources>
+    <string name="titulo_estoque">Controle de Estoque</string>
+    <string name="estoque_baixo">Estoque Baixo</string>
+    <string name="movimentacao_sucesso">Movimentação realizada com sucesso</string>
+    <string name="erro_estoque_insuficiente">Estoque insuficiente para esta saída</string>
+    <string name="quantidade_invalida">Quantidade informada é inválida</string>
+    <string name="alerta_estoque_configurado">Alerta de estoque mínimo configurado</string>
+</resources>
