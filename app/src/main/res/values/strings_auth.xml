@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash -->
+    <string name="splash_slogan">Seu estoque, sem papel e sem calculadora.</string>
+
+    <!-- Login / Cadastro -->
+    <string name="login_titulo_criar">Criar conta</string>
+    <string name="login_titulo_entrar">Entrar</string>
+    <string name="login_subtitulo_criar">Cadastre sua loja para começar.</string>
+    <string name="login_subtitulo_entrar">Acesse a loja %1$s</string>
+    <string name="login_nome_loja">Nome da loja</string>
+    <string name="login_nome_gestor">Nome do gestor</string>
+    <string name="login_categoria">Categoria da loja</string>
+    <string name="login_categoria_dica">Ex.: Papelaria</string>
+    <string name="login_senha">Senha</string>
+    <string name="login_senha_criar">Senha (mín. 4)</string>
+    <string name="login_mostrar_senha">Mostrar senha</string>
+    <string name="login_ocultar_senha">Ocultar senha</string>
+    <string name="login_botao_criar">Criar conta</string>
+    <string name="login_botao_entrar">Entrar</string>
+    <string name="login_erro_senha_incorreta">Senha incorreta. Tente novamente.</string>
+    <string name="login_erro_generico">Algo deu errado. Tente novamente.</string>
+</resources>

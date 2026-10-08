@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Perfil -->
+    <string name="perfil_titulo">Perfil</string>
+    <string name="perfil_trocar_foto">Trocar foto</string>
+    <string name="perfil_secao_resumo">Resumo</string>
+    <string name="perfil_resumo_produtos">Produtos</string>
+    <string name="perfil_resumo_investido">Total investido</string>
+    <string name="perfil_secao_conta">Conta</string>
+    <string name="perfil_editar_dados">Editar dados da loja</string>
+    <string name="perfil_alterar_senha">Alterar senha</string>
+    <string name="perfil_secao_aparencia">Aparência</string>
+    <string name="perfil_tema_claro">Claro</string>
+    <string name="perfil_tema_escuro">Escuro</string>
+    <string name="perfil_tema_sistema">Do Sistema</string>
+    <string name="perfil_secao_app">App</string>
+    <string name="perfil_sobre">Sobre o app</string>
+    <string name="perfil_sair">Sair</string>
+    <string name="perfil_sair_titulo">Sair da conta?</string>
+    <string name="perfil_sair_texto">Você precisará entrar novamente com a senha.</string>
+    <string name="perfil_editar_titulo">Editar dados da loja</string>
+    <string name="perfil_senha_atual">Senha atual</string>
+    <string name="perfil_senha_nova">Nova senha (mín. 4)</string>
+    <string name="perfil_senha_confirmar">Confirmar nova senha</string>
+    <string name="perfil_erro_senha_atual">Senha atual incorreta.</string>
+    <string name="perfil_erro_confirmacao">As senhas não coincidem.</string>
+    <string name="perfil_dados_salvos">Dados atualizados.</string>
+    <string name="perfil_senha_alterada">Senha alterada.</string>
+    <string name="perfil_erro_salvar">Não foi possível salvar. Tente novamente.</string>
+    <string name="perfil_erro_foto">Não foi possível salvar a foto. Tente novamente.</string>
+</resources>
