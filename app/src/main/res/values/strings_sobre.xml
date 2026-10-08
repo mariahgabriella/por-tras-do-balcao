@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Sobre -->
+    <string name="sobre_titulo">Sobre o app</string>
+    <string name="sobre_descricao">O app ajuda lojistas a cadastrar produtos, controlar o estoque e ver o total investido, sem papel e sem calculadora.</string>
+    <string name="sobre_versao">Versão %1$s</string>
+    <string name="sobre_integrantes_titulo">Integrantes do grupo Kaigang</string>
+    <!-- TROCAR pelos nomes reais do grupo -->
+    <string-array name="sobre_integrantes">
+        <item>Integrante 1</item>
+        <item>Integrante 2</item>
+        <item>Integrante 3</item>
+    </string-array>
+</resources>
