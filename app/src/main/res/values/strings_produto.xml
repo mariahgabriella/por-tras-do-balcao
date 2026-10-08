@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Principal -->
+    <string name="principal_titulo">Produtos</string>
+    <string name="principal_buscar">Buscar produto</string>
+    <string name="principal_relatorio">Abrir relatório</string>
+    <string name="principal_novo">Novo produto</string>
+    <string name="principal_vazio">Nenhum produto cadastrado ainda. Toque em \'+\' para começar.</string>
+    <string name="principal_cadastrar">Cadastrar produto</string>
+    <string name="principal_sem_resultado">Nada encontrado para %1$s</string>
+    <string name="principal_dica">Dica: deslize um item para a esquerda para excluir.</string>
+    <string name="principal_excluir_titulo">Excluir produto?</string>
+    <string name="principal_excluir_texto">\"%1$s\" será removido do estoque.</string>
+    <string name="principal_excluido">\"%1$s\" excluído</string>
+    <string name="principal_desfazer">Desfazer</string>
+    <string name="principal_salvo">Produto salvo.</string>
+    <string name="principal_excluido_simples">Produto excluído.</string>
+    <string name="principal_erro_desfazer">Não foi possível desfazer. Tente novamente.</string>
+
+    <!-- Produto (cadastro / edição) -->
+    <string name="produto_titulo_novo">Novo produto</string>
+    <string name="produto_titulo_editar">Editar produto</string>
+    <string name="produto_nome">Nome</string>
+    <string name="produto_categoria">Categoria</string>
+    <string name="produto_quantidade">Quantidade</string>
+    <string name="produto_minima">Quantidade mínima</string>
+    <string name="produto_custo">Preço de custo</string>
+    <string name="produto_prefixo_moeda">R$</string>
+    <string name="produto_erro_custo">O custo deve ser maior que zero.</string>
+    <string name="produto_erro_quantidade">Informe um número inteiro, 0 ou maior.</string>
+    <string name="produto_erro_salvar">Não foi possível salvar. Tente novamente.</string>
+    <string name="produto_excluir_titulo">Excluir produto?</string>
+    <string name="produto_excluir_texto">Esta ação remove o produto do estoque.</string>
+    <string name="produto_nao_encontrado">Este produto não existe mais.</string>
+
+    <!-- Relatório -->
+    <string name="relatorio_titulo">Relatório</string>
+    <string name="relatorio_total_investido">Total investido</string>
+    <string name="relatorio_produtos">Produtos</string>
+    <string name="relatorio_itens">Itens em estoque</string>
+    <string name="relatorio_por_valor">Por valor investido</string>
+    <string name="relatorio_item_detalhe">%1$d × %2$s</string>
+    <string name="relatorio_vazio">Nenhum produto cadastrado ainda.</string>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Comuns -->
+    <string name="comum_voltar">Voltar</string>
+    <string name="comum_cancelar">Cancelar</string>
+    <string name="comum_salvar">Salvar</string>
+    <string name="comum_excluir">Excluir</string>
+    <string name="comum_ok">OK</string>
+    <string name="comum_tentar_de_novo">Tentar de novo</string>
+    <string name="comum_estoque_baixo">Estoque baixo</string>
+    <string name="comum_unidade_abrev">unid.</string>
+    <string name="comum_logo">Logo do app</string>
+    <string name="comum_campo_vazio">Um campo está vazio. Preencha todos para continuar.</string>
+    <string name="comum_erro_carregar">Não foi possível carregar os dados.</string>
+    <string name="comum_erro_excluir">Não foi possível excluir. Tente novamente.</string>
+    <string name="comum_erro_senha_curta">A senha precisa ter no mínimo 4 caracteres.</string>
+    <string name="comum_erro_loja_duplicada">Já existe uma loja com esse nome.</string>
+
+    <!-- Barra inferior -->
+    <string name="nav_produtos">Produtos</string>
+    <string name="nav_estoque">Estoque</string>
+    <string name="nav_relatorio">Relatório</string>
+    <string name="nav_perfil">Perfil</string>
+</resources>
