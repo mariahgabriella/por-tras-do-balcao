@@ -111,7 +111,7 @@ Todos programam. O "papel" define quem responde por aquela parte, não quem trab
 
 ## 🤖 Bloco 10 — Acordo de trabalho com IA
 
-A implementação pode ser feita com o Gemini no Android Studio. Vocês orientam, ele digita — e cada integrante precisa saber explicar o que entrou no projeto. Regras completas em `USO_DE_IA/USO_DE_IA.md` e `AGENTS.md`.
+A implementação pode ser feita com o Gemini no Android Studio. Vocês orientam, ele digita — e cada integrante precisa saber explicar o que entrou no projeto. Regras completas em `docs/USO_DE_IA/USO_DE_IA.md` e `AGENTS.md`.
 
 **Três regras do `AGENTS.md`:**
 - A IA não pode tomar decisões sem aprovação do grupo.
@@ -151,7 +151,7 @@ A implementação pode ser feita com o Gemini no Android Studio. Vocês orientam
 - O app tem nome, ícone e cor próprios (nada de ícone padrão do Android).
 - Duas pessoas de fora do grupo instalaram o .apk e conseguiram usar sem explicação.
 - O README.md explica o que o app faz, com o que foi feito e como gerar o build.
-- O USO_DE_IA/USO_DE_IA.md e o AGENTS.md estão preenchidos.
+- O docs/USO_DE_IA/USO_DE_IA.md e o AGENTS.md estão preenchidos.
 - Cada integrante consegue abrir o projeto e fazer uma mudança pequena sozinho.
 - Todo arquivo nosso tem o comentário de fronteira escrito por nós.
 
