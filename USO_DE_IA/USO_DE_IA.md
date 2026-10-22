@@ -41,7 +41,7 @@ Combinados do grupo:
 | :---- | :---- |
 | Telas (`ui/`) | Ian |
 | Dados (`data/`) | Heitor |
-| Identidade visual e recursos | Gabi |
+| Identidade visual e recursos | Mariah |
 | Build e artefatos de loja | Pedro |
 
 - O histórico de commits do repositório permite ver quem integrou cada parte ao projeto.
