@@ -51,7 +51,7 @@ Combinados do grupo:
 **Aproveitado**
 
 - Sequência de comandos Git/Git Bash sugerida pelo Claude (criar a branch `docs/uso-de-ia`, mover o arquivo com `git mv`, commit e push). Pedro executou cada comando e conferiu o resultado com `git status`.
-- Estrutura da pasta `USO_DE_IA/` com as subpastas `prompts/` e `outputs/`, incluindo arquivos `.gitkeep` para o Git versionar as pastas vazias.
+- Estrutura da pasta `docs/USO_DE_IA/` com as subpastas `prompts/` e `outputs/`, incluindo arquivos `.gitkeep` para o Git versionar as pastas vazias.
 - Comando sugerido pelo Claude para atualizar as referências ao caminho antigo `docs/USO_DE_IA.md` no `docs/CANVAS.md`. Pedro conferiu o resultado com `git diff` e com uma nova busca.
 - Rascunho deste documento, escrito pelo Claude a partir do `AGENTS.md`, do Bloco 10 do `CANVAS.md` e do histórico de commits que Pedro enviou.
 
@@ -67,10 +67,10 @@ Combinados do grupo:
 - O Claude apontou que o `AGENTS.md` cita o `applicationId` `br.edu.ifpe.atrasdobalcao` e a estrutura `br/edu/ifpe/atrasdobalcao/`, mas o código usa `com.example.portrasdobalcao`. Essa sugestão de correção depende de decisão do grupo e foi tratada na Issue 2. 
 ## 6. Organização dos registros
 
-Os registros de uso de IA ficam na pasta `USO_DE_IA/`:
+Os registros de uso de IA ficam na pasta `docs/USO_DE_IA/`:
 
 ```
-USO_DE_IA/
+docs/USO_DE_IA/
 ├── USO_DE_IA.md   # este documento
 ├── prompts/       # prompts enviados às ferramentas de IA
 └── outputs/       # respostas e resultados gerados pelas ferramentas
