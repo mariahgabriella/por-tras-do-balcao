@@ -1,0 +1,7 @@
+# Prompt 54 — ui/features/estoque/EstoqueScreen.kt
+
+Ajusta a tela de estoque pra usar o novo jeito de guardar o estado
+do carregamento, com um desenho diferente pra cada uma das 4
+opções, sem deixar nenhuma de fora e sem um "senão" genérico no
+final. O filtro de só mostrar estoque baixo continua funcionando
+igual.
