@@ -1,0 +1,26 @@
+Prompt correspondente: 49
+Ferramenta: Gemini (Agent Mode)
+
+Resposta da IA:
+
+Beleza, adaptei o ViewModel para usar o UiState:
+
+```
+kotlin
+data class PrincipalUiState(
+    val tela: UiState = UiState.Carregando,
+    val busca: String = "",
+)
+
+fun carregar() {
+    viewModelScope.launch {
+        repo.observarItens()
+            .catch { _estado.update { it.copy(tela = UiState.Erro("Erro ao carregar")) } }
+            .collect { lista ->
+                _estado.update {
+                    it.copy(tela = if (lista.isEmpty()) UiState.Vazio else UiState.Sucesso(lista))
+                }
+            }
+    }
+}
+```

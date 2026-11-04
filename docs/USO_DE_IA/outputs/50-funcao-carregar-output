@@ -1,0 +1,47 @@
+Prompt correspondente: 50
+Ferramenta: Gemini (Agent Mode)
+
+Resposta da IA:
+
+Entendido. Antes de mostrar o código: vou manter job para cancelar coletas anteriores, tratar CancellationException primeiro e relançá-la (senão o cancelamento do coroutine vira “erro” na tela por engano), depois IOException com mensagem específica, depois Exception genérico. E vou aplicar o filtro da busca atual sempre que a lista for recebida, pra não perder o filtro se o Flow reemitir.
+´´
+kotlin
+import java.io.IOException
+import kotlinx.coroutines.CancellationException
+
+data class PrincipalUiState(
+    val tela: UiState = UiState.Carregando,
+    val busca: String = "",
+    val pendenteExclusao: ProdutoItem? = null,
+    val snackbar: SnackbarProduto? = null,
+)
+
+fun carregar() {
+    job?.cancel()
+    _estado.update { it.copy(tela = UiState.Carregando) }
+    job = viewModelScope.launch {
+        try {
+            repo.observarItens().collect { lista ->
+                todos = lista
+                val buscaAtual = _estado.value.busca
+                val novaTela = if (lista.isEmpty()) {
+                    UiState.Vazio
+                } else {
+                    UiState.Sucesso(filtrar(lista, buscaAtual))
+                }
+                _estado.update { it.copy(tela = novaTela) }
+            }
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: IOException) {
+            _estado.update {
+                it.copy(tela = UiState.Erro("Sem conexão. Verifique a internet e tente novamente."))
+            }
+        } catch (e: Exception) {
+            _estado.update {
+                it.copy(tela = UiState.Erro("Não foi possível carregar os dados."))
+            }
+        }
+    }
+}
+´´
