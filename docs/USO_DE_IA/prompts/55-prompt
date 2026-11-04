@@ -1,0 +1,6 @@
+# Prompt 55 — ui/features/relatorio/RelatorioViewModel.kt
+
+A tela de relatório guarda os números de total investido,
+quantidade de produtos e total de itens prontos. Quero trocar pelo
+mesmo padrão de 4 estados, calculando esses números na hora de
+mostrar em vez de guardar prontos.

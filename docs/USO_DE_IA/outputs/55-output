@@ -1,0 +1,10 @@
+# Saída 55 — ui/features/relatorio/RelatorioViewModel.kt
+
+- Prompt correspondente: Prompt 53
+- Ferramenta: Gemini (Agent Mode)
+- Membro: Ian
+
+Simplifiquei o estado pra guardar só o campo "tela". Os três
+números saem do estado — vão ser calculados na tela a partir da
+lista de sucesso. A lista continua sendo ordenada antes de entrar
+no estado, porque isso é parte de preparar os dados.
