@@ -1,0 +1,10 @@
+# Saída 53 — ui/features/estoque/EstoqueViewModel.kt
+
+- Prompt correspondente: Prompt 51
+- Ferramenta: Gemini (Agent Mode)
+- Membro: 1
+
+Mantive os campos do diálogo de movimentação intactos, e troquei
+só os três campos de carregamento por um campo "tela" do novo
+tipo. O filtro de estoque baixo virou um cálculo em cima desse
+campo, pra continuar funcionando igual.
