@@ -1,0 +1,9 @@
+# Saída 54 — ui/features/estoque/EstoqueScreen.kt
+
+- Prompt correspondente: Prompt 54
+- Ferramenta: Gemini (Agent Mode)
+- Membro: Heitor
+
+Troquei a cadeia de if/else por um "when" nos quatro casos do
+estado. Pra manter o filtro de estoque baixo, usei o campo que já
+calcula isso em vez de pegar a lista direto do caso de sucesso.
