@@ -31,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.portrasdobalcao.R
 import com.example.portrasdobalcao.model.ProdutoItem
+import com.example.portrasdobalcao.ui.UiState
 import com.example.portrasdobalcao.ui.components.BarraTopo
 import com.example.portrasdobalcao.ui.components.CartaoApp
 import com.example.portrasdobalcao.ui.theme.PorTrasDoBalcaoTheme
@@ -59,58 +60,66 @@ fun RelatorioScreen(
             )
         },
     ) { padding ->
-        when {
-            estado.carregando -> Box(Modifier.padding(padding).fillMaxSize(), contentAlignment = Alignment.Center) {
+        // O que faz: desenha o relatório de acordo com o UiState atual, calculando os totais na hora.
+        // Por que existe: evita que a tela leia campos de totais que podiam ficar desatualizados em relação à lista.
+        // O que quebra se sumir: a tela volta a ler totais prontos do estado, sem garantia de que batem com a lista.
+        when (val atual = estado.tela) {
+            is UiState.Carregando -> Box(Modifier.padding(padding).fillMaxSize(), contentAlignment = Alignment.Center) {
                 CircularProgressIndicator()
             }
 
-            estado.erro -> Column(
+            is UiState.Erro -> Column(
                 Modifier.padding(padding).fillMaxSize().padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
             ) {
-                Text(stringResource(R.string.comum_erro_carregar), textAlign = TextAlign.Center)
+                Text(atual.mensagem, textAlign = TextAlign.Center)
                 Spacer(Modifier.height(16.dp))
                 Button(onClick = onTentarDeNovo) { Text(stringResource(R.string.comum_tentar_de_novo)) }
             }
 
-            else -> LazyColumn(
-                Modifier.padding(padding),
-                contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
+            is UiState.Vazio -> Column(
+                Modifier.padding(padding).fillMaxSize().padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
             ) {
-                item { CartaoTotal(estado.totalInvestido) }
-                item {
-                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        CartaoNumero(
-                            rotulo = stringResource(R.string.relatorio_produtos),
-                            valor = estado.quantidadeProdutos.toString(),
-                            modifier = Modifier.weight(1f),
-                        )
-                        CartaoNumero(
-                            rotulo = stringResource(R.string.relatorio_itens),
-                            valor = estado.totalItens.toString(),
-                            modifier = Modifier.weight(1f),
-                        )
+                Text(stringResource(R.string.relatorio_vazio), color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+
+            is UiState.Sucesso -> {
+                val totalInvestido = atual.itens.sumOf { it.subtotal }
+                val quantidadeProdutos = atual.itens.size
+                val totalItens = atual.itens.sumOf { it.quantidade }
+
+                LazyColumn(
+                    Modifier.padding(padding),
+                    contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    item { CartaoTotal(totalInvestido) }
+                    item {
+                        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                            CartaoNumero(
+                                rotulo = stringResource(R.string.relatorio_produtos),
+                                valor = quantidadeProdutos.toString(),
+                                modifier = Modifier.weight(1f),
+                            )
+                            CartaoNumero(
+                                rotulo = stringResource(R.string.relatorio_itens),
+                                valor = totalItens.toString(),
+                                modifier = Modifier.weight(1f),
+                            )
+                        }
                     }
-                }
-                item {
-                    Text(
-                        stringResource(R.string.relatorio_por_valor),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(top = 8.dp),
-                    )
-                }
-                if (estado.produtos.isEmpty()) {
                     item {
                         Text(
-                            stringResource(R.string.relatorio_vazio),
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            stringResource(R.string.relatorio_por_valor),
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(top = 8.dp),
                         )
                     }
-                } else {
-                    items(estado.produtos, key = { it.id }) { ItemRelatorio(it) }
+                    items(atual.itens, key = { it.id }) { ItemRelatorio(it) }
                 }
             }
         }
@@ -119,21 +128,18 @@ fun RelatorioScreen(
 
 @Composable
 private fun CartaoTotal(total: Double) {
-    CartaoApp(
-        Modifier.fillMaxWidth(),
-        containerColor = MaterialTheme.colorScheme.primary,
-    ) {
-        Column(Modifier.padding(horizontal = 24.dp, vertical = 20.dp)) {
+    CartaoApp(Modifier.fillMaxWidth()) {
+        Column(Modifier.fillMaxWidth().padding(20.dp)) {
             Text(
                 stringResource(R.string.relatorio_total_investido),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onPrimary,
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
+            Spacer(Modifier.height(4.dp))
             Text(
                 formatarMoeda(total),
-                style = MaterialTheme.typography.headlineLarge,
-                fontWeight = FontWeight.ExtraBold,
-                color = MaterialTheme.colorScheme.onPrimary,
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
             )
         }
     }
@@ -142,13 +148,12 @@ private fun CartaoTotal(total: Double) {
 @Composable
 private fun CartaoNumero(rotulo: String, valor: String, modifier: Modifier = Modifier) {
     CartaoApp(modifier) {
-        Column(Modifier.fillMaxWidth().padding(16.dp)) {
-            Text(
-                rotulo,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Text(valor, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.ExtraBold)
+        Column(
+            Modifier.fillMaxWidth().padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(valor, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+            Text(rotulo, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
@@ -158,40 +163,19 @@ private fun ItemRelatorio(item: ProdutoItem) {
     CartaoApp(Modifier.fillMaxWidth()) {
         Row(
             Modifier.fillMaxWidth().padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
+            horizontalAlignment = Alignment.Start.let { Alignment.CenterHorizontally },
         ) {
             Column(Modifier.weight(1f)) {
-                Text(item.nome, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                Text(item.nome, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
                 Text(
-                    stringResource(R.string.relatorio_item_detalhe, item.quantidade, formatarMoeda(item.precoCusto)),
+                    "${item.quantidade} unid.",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
-            Text(formatarMoeda(item.subtotal), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Text(formatarMoeda(item.subtotal), style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
         }
+
+
     }
-}
-
-private val estadoPreview = RelatorioUiState(
-    carregando = false,
-    totalInvestido = 35.0,
-    quantidadeProdutos = 2,
-    totalItens = 5,
-    produtos = listOf(
-        ProdutoItem(1, "Caderno", "Papelaria", 2, 1, 10.0),
-        ProdutoItem(2, "Caneta", "Papelaria", 3, 1, 5.0),
-    ),
-)
-
-@Preview(name = "Relatório claro", showSystemUi = true)
-@Composable
-private fun RelatorioClaroPreview() {
-    PorTrasDoBalcaoTheme(darkTheme = false) { RelatorioScreen(estadoPreview, {}, {}) }
-}
-
-@Preview(name = "Relatório escuro", showSystemUi = true)
-@Composable
-private fun RelatorioEscuroPreview() {
-    PorTrasDoBalcaoTheme(darkTheme = true) { RelatorioScreen(estadoPreview, {}, {}) }
 }

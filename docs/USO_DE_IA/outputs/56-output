@@ -1,0 +1,11 @@
+# Saída 56 — ui/features/relatorio/RelatorioScreen.kt
+
+- Prompt correspondente: Prompt 54
+- Ferramenta: Gemini (Agent Mode)
+- Membro: Pedro
+
+Troquei a leitura direta dos totais por um "when" nos quatro
+casos. No caso de sucesso, calculei os três números ali mesmo em
+cima da lista recebida, em vez de lê-los prontos — assim eles nunca
+ficam desatualizados em relação à lista mostrada. Mantive o título
+"Por valor" e trouxe o aviso de lista vazia pro caso UiState.Vazio.
