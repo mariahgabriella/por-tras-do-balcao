@@ -1,0 +1,17 @@
+# Saída 47 
+ 
+- **Prompt correspondente:** 48
+- **Ferramenta:** Gemini (Agent Mode)
+## Resposta da IA
+ 
+Claro! Aqui está uma sealed interface simples para representar os estados de carregamento:
+ 
+```kotlin
+package com.example.portrasdobalcao.ui
+ 
+sealed class UiState {
+    object Loading : UiState()
+    object Empty : UiState()
+    data class Success(val data: List<Any>) : UiState()
+    object Error : UiState()
+}
