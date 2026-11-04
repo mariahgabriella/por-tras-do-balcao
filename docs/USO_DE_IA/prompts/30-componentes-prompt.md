@@ -1,0 +1,20 @@
+# Prompt 30 — ui/components/Componentes.kt
+
+- **Ferramenta (segundo o relatório do grupo):** Gemini (Agent Mode)
+- **Quem fez (pelo histórico do Git):** Mariah (conta mariahgabriella)
+- **Responsável por explicar (divisão do AGENTS.md):** Ian (telas)
+- **Data de entrada no repositório:** 2026-10-07. É a data em que o arquivo apareceu no Git, não a data em que o prompt foi escrito.
+- **Natureza do registro:** reconstruído a partir do relatório de prompts do grupo. O texto não é uma cópia do original da conversa, e o histórico do Git não registra a ferramenta usada.
+- **Saída correspondente:** [30-componentes-output.md](../outputs/30-componentes-output.md)
+
+## Arquivos resultantes
+
+- `app/src/main/java/com/example/portrasdobalcao/ui/components/Componentes.kt`: 2026-10-07 (commit `1a29293`, autor do commit: Mariah (conta mariahgabriella))
+
+## P1 (prompt inicial)
+
+Crie componentes reutilizáveis.
+
+## P2 (prompt de melhoria)
+
+Crie em Componentes.kt: DivisorFino, BarraTopo, CartaoApp, LogoApp, CampoComRotulo, SeloEstoqueBaixo, SeletorSegmentado e TituloSecao. Eles recebem estado e callbacks e não têm lógica de negócio.

@@ -1,0 +1,11 @@
+# Saída 46 — rules.keep e .gitignore (raiz e app/)
+
+- **Prompt correspondente:** [46-gitignore-keep-prompt.md](../prompts/46-gitignore-keep-prompt.md)
+- **Resultado:** os arquivos abaixo, na versão que está na `main`. O grupo pode ter ajustado o texto gerado antes do commit.
+- **Resposta original da IA:** não registrada. Se o grupo ainda tiver o histórico da conversa ou do painel do Android Studio, a resposta pode ser colada nesta pasta.
+
+## Arquivos
+
+- `app/src/main/keepRules/rules.keep`: 2026-10-07 (commit `4ae8afa`, autor do commit: Heitor (conta kansasgrind))
+- `.gitignore`: 2026-09-09 (commit `dd81cd7`, autor do commit: Mariah (conta mariahgabriella))
+- `app/.gitignore`: 2026-10-07 (commit `4ae8afa`, autor do commit: Heitor (conta kansasgrind))
