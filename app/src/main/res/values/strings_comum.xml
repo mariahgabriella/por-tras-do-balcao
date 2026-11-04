@@ -12,6 +12,7 @@
     <string name="comum_logo">Logo do app</string>
     <string name="comum_campo_vazio">Um campo está vazio. Preencha todos para continuar.</string>
     <string name="comum_erro_carregar">Não foi possível carregar os dados.</string>
+    <string name="comum_erro_sem_conexao">Sem conexão. Verifique a internet e tente novamente.</string>
     <string name="comum_erro_excluir">Não foi possível excluir. Tente novamente.</string>
     <string name="comum_erro_senha_curta">A senha precisa ter no mínimo 4 caracteres.</string>
     <string name="comum_erro_loja_duplicada">Já existe uma loja com esse nome.</string>

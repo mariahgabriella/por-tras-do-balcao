@@ -163,7 +163,7 @@ private fun ItemRelatorio(item: ProdutoItem) {
     CartaoApp(Modifier.fillMaxWidth()) {
         Row(
             Modifier.fillMaxWidth().padding(16.dp),
-            horizontalAlignment = Alignment.Start.let { Alignment.CenterHorizontally },
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Column(Modifier.weight(1f)) {
                 Text(item.nome, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
@@ -175,7 +175,5 @@ private fun ItemRelatorio(item: ProdutoItem) {
             }
             Text(formatarMoeda(item.subtotal), style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
         }
-
-
     }
 }
