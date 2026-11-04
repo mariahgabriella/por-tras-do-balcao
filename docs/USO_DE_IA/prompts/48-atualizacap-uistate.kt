@@ -1,0 +1,2 @@
+P2 (melhoria): A sealed interface chama-se UiState, dentro do pacote com.example.portrasdobalcao.ui. 
+Quatro estados: Carregando e Vazio como data object (não guardam dado), Erro como data class com um campo mensagem: String, e Sucesso como data class com um campo itens: List (a entidade já existe em com.example.portrasdobalcao.model, não crie outra). Não adicione nenhum estado além desses quatro, e não acrescente um branch else em nenhum lugar que use esse tipo.

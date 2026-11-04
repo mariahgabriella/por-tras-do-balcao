@@ -1,0 +1,18 @@
+Saída 48
+Prompt correspondente: 48
+Ferramenta: Gemini (Agent Mode)
+Resposta da IA
+
+Entendido. Com essas especificações, a sealed interface fica assim:
+
+kotlin
+package com.example.portrasdobalcao.ui
+
+import com.example.portrasdobalcao.model.ProdutoItem
+
+sealed interface UiState {
+    data object Carregando : UiState
+    data object Vazio : UiState
+    data class Erro(val mensagem: String) : UiState
+    data class Sucesso(val itens: List<ProdutoItem>) : UiState
+}
