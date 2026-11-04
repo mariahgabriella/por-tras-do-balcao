@@ -1,5 +1,10 @@
+// O que faz: decide qual dos 4 UiState mostrar, buscando os dados do repositório.
+// Por que existe: concentra o try/catch num só lugar, longe da tela.
+// O que quebra se sumir: a tela fica sem saber se está carregando, vazia, com erro ou com sucesso.
+
 package com.example.portrasdobalcao.ui.features.principal
 
+import com.example.portrasdobalcao.ui.UiState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.portrasdobalcao.model.ProdutoItem
@@ -12,6 +17,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.io.IOException
+import kotlinx.coroutines.CancellationException
 
 sealed interface SnackbarProduto {
     object Salvo : SnackbarProduto
@@ -20,13 +27,9 @@ sealed interface SnackbarProduto {
     object ErroExcluir : SnackbarProduto
     object ErroDesfazer : SnackbarProduto
 }
-
 data class PrincipalUiState(
-    val carregando: Boolean = true,
-    val erro: Boolean = false,
+    val tela: UiState = UiState.Carregando,
     val busca: String = "",
-    val itens: List<ProdutoItem> = emptyList(),
-    val totalCadastrados: Int = 0,
     val pendenteExclusao: ProdutoItem? = null,
     val snackbar: SnackbarProduto? = null,
 )
@@ -43,24 +46,33 @@ class ProdutoViewModel(private val repo: ProdutoRepository) : ViewModel() {
     }
 
     fun carregar() {
-        job?.cancel()
-        _estado.update { it.copy(carregando = true, erro = false) }
-        job = viewModelScope.launch {
-            repo.observarItens()
-                .catch { _estado.update { s -> s.copy(carregando = false, erro = true) } }
-                .collect { lista ->
-                    todos = lista
-                    _estado.update { s ->
-                        s.copy(
-                            carregando = false,
-                            erro = false,
-                            itens = filtrar(lista, s.busca),
-                            totalCadastrados = lista.size,
-                        )
-                    }
+    job?.cancel()
+    _estado.update { it.copy(tela = UiState.Carregando) }
+    job = viewModelScope.launch {
+        try {
+            repo.observarItens().collect { lista ->
+                todos = lista
+                val buscaAtual = _estado.value.busca
+                val novaTela = if (lista.isEmpty()) {
+                    UiState.Vazio
+                } else {
+                    UiState.Sucesso(filtrar(lista, buscaAtual))
                 }
+                _estado.update { it.copy(tela = novaTela) }
+            }
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: IOException) {
+            _estado.update {
+                it.copy(tela = UiState.Erro("Sem conexão. Verifique a internet e tente novamente."))
+            }
+        } catch (e: Exception) {
+            _estado.update {
+                it.copy(tela = UiState.Erro("Não foi possível carregar os dados."))
+            }
         }
     }
+}
 
     fun onBuscaChange(texto: String) {
         _estado.update { it.copy(busca = texto, itens = filtrar(todos, texto)) }
