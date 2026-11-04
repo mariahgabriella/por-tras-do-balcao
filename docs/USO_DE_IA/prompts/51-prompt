@@ -1,0 +1,7 @@
+# Prompt 51 — ui/features/principal/PrincipalScreen.kt
+
+Ajusta a tela principal pra usar o novo estado de 4 opções
+(carregando, vazio, erro, sucesso), com um desenho diferente pra
+cada uma, sem deixar nenhuma de fora e sem usar um "senão" genérico
+no final. Quando der sucesso, usa a lista que já vem pronta, sem
+filtrar de novo.

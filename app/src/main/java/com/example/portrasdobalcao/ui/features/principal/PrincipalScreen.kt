@@ -55,6 +55,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.portrasdobalcao.R
 import com.example.portrasdobalcao.model.ProdutoItem
+import com.example.portrasdobalcao.ui.UiState
 import com.example.portrasdobalcao.ui.components.BarraTopo
 import com.example.portrasdobalcao.ui.components.CartaoApp
 import com.example.portrasdobalcao.ui.components.SeloEstoqueBaixo
@@ -135,45 +136,51 @@ fun PrincipalScreen(
             CampoBusca(valor = estado.busca, onValorChange = onBuscaChange)
             Spacer(Modifier.height(16.dp))
 
+            // O que faz: desenha a tela principal de acordo com o UiState atual.
+            // Por que existe: cada estado precisa de um desenho diferente na tela.
+            // O que quebra se sumir: a tela volta a decidir o que desenhar com condições soltas, sem o compilador avisar se esquecer um caso.
             Box(Modifier.weight(1f).fillMaxWidth()) {
-                when {
-                    estado.carregando -> CircularProgressIndicator(Modifier.align(Alignment.Center))
+                when (val atual = estado.tela) {
+                    is UiState.Carregando -> CircularProgressIndicator(Modifier.align(Alignment.Center))
 
-                    estado.erro -> Column(
+                    is UiState.Erro -> Column(
                         Modifier.align(Alignment.Center),
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        Text(stringResource(R.string.comum_erro_carregar), textAlign = TextAlign.Center)
+                        Text(atual.mensagem, textAlign = TextAlign.Center)
                         Spacer(Modifier.height(16.dp))
                         Button(onClick = onTentarDeNovo) { Text(stringResource(R.string.comum_tentar_de_novo)) }
                     }
 
-                    estado.totalCadastrados == 0 -> Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    is UiState.Vazio -> Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         EstadoVazio(onCadastrar = onNovoProduto)
                         Spacer(Modifier.height(16.dp))
                         DicaDeslizar()
                     }
 
-                    estado.itens.isEmpty() -> Text(
-                        text = stringResource(R.string.principal_sem_resultado, estado.busca.trim()),
-                        modifier = Modifier.align(Alignment.Center),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        textAlign = TextAlign.Center,
-                    )
-
-                    else -> LazyColumn(
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
-                    ) {
-                        items(estado.itens, key = { it.id }) { item ->
-                            ItemProduto(
-                                item = item,
-                                onClick = { onEditarProduto(item.id) },
-                                onSolicitarExclusao = { onSolicitarExclusao(item) },
+                    is UiState.Sucesso -> {
+                        val filtrados = atual.itens // já vem filtrado
+                        if (filtrados.isEmpty()) {
+                            Text(
+                                text = stringResource(R.string.principal_sem_resultado, estado.busca.trim()),
+                                modifier = Modifier.align(Alignment.Center),
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                textAlign = TextAlign.Center,
                             )
-                        }
-                        item {
-                            Box(Modifier.fillMaxWidth().padding(vertical = 8.dp), contentAlignment = Alignment.Center) {
-                                DicaDeslizar()
+                        } else {
+                            LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                                items(filtrados, key = { it.id }) { item ->
+                                    ItemProduto(
+                                        item = item,
+                                        onClick = { onEditarProduto(item.id) },
+                                        onSolicitarExclusao = { onSolicitarExclusao(item) },
+                                    )
+                                }
+                                item {
+                                    Box(Modifier.fillMaxWidth().padding(vertical = 8.dp), contentAlignment = Alignment.Center) {
+                                        DicaDeslizar()
+                                    }
+                                }
                             }
                         }
                     }
@@ -346,7 +353,7 @@ private fun PrincipalPreviewConteudo(estado: PrincipalUiState) {
 @Composable
 private fun PrincipalClaroPreview() {
     PorTrasDoBalcaoTheme(darkTheme = false) {
-        PrincipalPreviewConteudo(PrincipalUiState(carregando = false, itens = itensPreview, totalCadastrados = 2))
+        PrincipalPreviewConteudo(PrincipalUiState(tela = UiState.Sucesso(itensPreview)))
     }
 }
 
@@ -354,6 +361,6 @@ private fun PrincipalClaroPreview() {
 @Composable
 private fun PrincipalEscuroPreview() {
     PorTrasDoBalcaoTheme(darkTheme = true) {
-        PrincipalPreviewConteudo(PrincipalUiState(carregando = false))
+        PrincipalPreviewConteudo(PrincipalUiState(tela = UiState.Vazio))
     }
 }
