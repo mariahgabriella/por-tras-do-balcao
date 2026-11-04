@@ -1,0 +1,16 @@
+# Saída 51 — ui/features/principal/PrincipalScreen.kt
+
+- Prompt correspondente: Prompt 51
+- Ferramenta: Gemini (Agent Mode)
+- Membro: Ian
+
+Troquei a cadeia de condições por um "when" que testa o novo
+estado, cobrindo os quatro casos: carregando mostra o indicador
+giratório, erro mostra a mensagem com botão de tentar de novo,
+vazio reaproveita o aviso que já existia, e sucesso mostra a lista
+já filtrada que vem pronta, sem filtrar de novo na tela. Também
+ajustei os dois Previews no final do arquivo, que usavam os campos
+antigos. Não coloquei nenhum "senão" de propósito.
+
+Resultado: código igual ao da Etapa 3 do guia. Aceito pelo grupo
+sem alterações.
