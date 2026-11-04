@@ -4,22 +4,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.portrasdobalcao.model.ProdutoItem
 import com.example.portrasdobalcao.data.repository.ProdutoRepository
+import com.example.portrasdobalcao.ui.UiState
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.io.IOException
 
+// O que faz: guarda o estado da tela de relatório, usando os 4 estados do UiState.
+// Por que existe: evita guardar totais calculados separados da lista, que podem ficar dessincronizados.
+// O que quebra se sumir: a tela volta a mostrar carregando/erro soltos, e os totais voltam a ser guardados à parte.
 data class RelatorioUiState(
-    val carregando: Boolean = true,
-    val erro: Boolean = false,
-    val totalInvestido: Double = 0.0,
-    val quantidadeProdutos: Int = 0,
-    val totalItens: Int = 0,
-    /** Ordenados pelo valor investido, maior primeiro. */
-    val produtos: List<ProdutoItem> = emptyList(),
+    val tela: UiState = UiState.Carregando,
 )
 
 class RelatorioViewModel(private val repo: ProdutoRepository) : ViewModel() {
@@ -35,19 +34,22 @@ class RelatorioViewModel(private val repo: ProdutoRepository) : ViewModel() {
     /** Os valores se atualizam sozinhos: o repositório entrega um Flow do banco. */
     fun carregar() {
         job?.cancel()
-        _estado.update { it.copy(carregando = true, erro = false) }
+        _estado.update { it.copy(tela = UiState.Carregando) }
         job = viewModelScope.launch {
-            repo.observarItens()
-                .catch { _estado.update { s -> s.copy(carregando = false, erro = true) } }
-                .collect { lista ->
-                    _estado.value = RelatorioUiState(
-                        carregando = false,
-                        totalInvestido = lista.sumOf { it.subtotal },
-                        quantidadeProdutos = lista.size,
-                        totalItens = lista.sumOf { it.quantidade },
-                        produtos = lista.sortedByDescending { it.subtotal },
-                    )
+            try {
+                repo.observarItens().collect { lista ->
+                    val ordenada = lista.sortedByDescending { it.subtotal }
+                    _estado.update {
+                        it.copy(tela = if (lista.isEmpty()) UiState.Vazio else UiState.Sucesso(ordenada))
+                    }
                 }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: IOException) {
+                _estado.update { it.copy(tela = UiState.Erro("Sem conexão. Verifique a internet e tente novamente.")) }
+            } catch (e: Exception) {
+                _estado.update { it.copy(tela = UiState.Erro("Não foi possível carregar os dados.")) }
+            }
         }
     }
 }
