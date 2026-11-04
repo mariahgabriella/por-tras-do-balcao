@@ -1,0 +1,10 @@
+# Saída 52 — ui/features/principal/ProdutoViewModel.kt
+
+- Prompt correspondente: Prompt 50
+- Ferramenta: Gemini (Agent Mode)
+- Membro: Pedro
+
+Ajustei a função de busca pra só trocar a lista filtrada quando o
+estado atual já é de sucesso. Nos outros casos (carregando, vazio
+ou erro), ela só guarda o texto digitado, sem tentar filtrar uma
+lista que não existe ainda.

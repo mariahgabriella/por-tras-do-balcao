@@ -1,24 +1,19 @@
-// O que faz: decide qual dos 4 UiState mostrar, buscando os dados do repositório.
-// Por que existe: concentra o try/catch num só lugar, longe da tela.
-// O que quebra se sumir: a tela fica sem saber se está carregando, vazia, com erro ou com sucesso.
-
 package com.example.portrasdobalcao.ui.features.principal
 
-import com.example.portrasdobalcao.ui.UiState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.portrasdobalcao.model.ProdutoItem
 import com.example.portrasdobalcao.data.repository.ProdutoRepository
+import com.example.portrasdobalcao.ui.UiState
 import com.example.portrasdobalcao.util.semAcentoMinusculo
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.io.IOException
-import kotlinx.coroutines.CancellationException
 
 sealed interface SnackbarProduto {
     object Salvo : SnackbarProduto
@@ -27,6 +22,10 @@ sealed interface SnackbarProduto {
     object ErroExcluir : SnackbarProduto
     object ErroDesfazer : SnackbarProduto
 }
+
+// O que faz: guarda o estado da tela principal, usando os 4 estados do UiState.
+// Por que existe: substitui os campos soltos carregando/erro/itens por um único campo "tela".
+// O que quebra se sumir: a tela volta a decidir o estado com booleans soltos, sem checagem do compilador.
 data class PrincipalUiState(
     val tela: UiState = UiState.Carregando,
     val busca: String = "",
@@ -45,37 +44,50 @@ class ProdutoViewModel(private val repo: ProdutoRepository) : ViewModel() {
         carregar()
     }
 
+    // O que faz: decide qual dos 4 UiState mostrar, buscando os dados do repositório.
+    // Por que existe: concentra o try/catch num só lugar, longe da tela.
+    // O que quebra se sumir: a tela fica sem saber se está carregando, vazia, com erro ou com sucesso.
     fun carregar() {
-    job?.cancel()
-    _estado.update { it.copy(tela = UiState.Carregando) }
-    job = viewModelScope.launch {
-        try {
-            repo.observarItens().collect { lista ->
-                todos = lista
-                val buscaAtual = _estado.value.busca
-                val novaTela = if (lista.isEmpty()) {
-                    UiState.Vazio
-                } else {
-                    UiState.Sucesso(filtrar(lista, buscaAtual))
+        job?.cancel()
+        _estado.update { it.copy(tela = UiState.Carregando) }
+        job = viewModelScope.launch {
+            try {
+                repo.observarItens().collect { lista ->
+                    todos = lista
+                    val buscaAtual = _estado.value.busca
+                    val novaTela = if (lista.isEmpty()) {
+                        UiState.Vazio
+                    } else {
+                        UiState.Sucesso(filtrar(lista, buscaAtual))
+                    }
+                    _estado.update { it.copy(tela = novaTela) }
                 }
-                _estado.update { it.copy(tela = novaTela) }
-            }
-        } catch (e: CancellationException) {
-            throw e
-        } catch (e: IOException) {
-            _estado.update {
-                it.copy(tela = UiState.Erro("Sem conexão. Verifique a internet e tente novamente."))
-            }
-        } catch (e: Exception) {
-            _estado.update {
-                it.copy(tela = UiState.Erro("Não foi possível carregar os dados."))
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: IOException) {
+                _estado.update {
+                    it.copy(tela = UiState.Erro("Sem conexão. Verifique a internet e tente novamente."))
+                }
+            } catch (e: Exception) {
+                _estado.update {
+                    it.copy(tela = UiState.Erro("Não foi possível carregar os dados."))
+                }
             }
         }
     }
-}
 
+    // O que faz: atualiza o texto da busca e refiltra a lista, só quando já existe uma lista de sucesso.
+    // Por que existe: evita tentar filtrar quando a tela ainda está carregando ou com erro.
+    // O que quebra se sumir: a busca para de funcionar, ou tenta filtrar uma lista que não existe.
     fun onBuscaChange(texto: String) {
-        _estado.update { it.copy(busca = texto, itens = filtrar(todos, texto)) }
+        _estado.update { estado ->
+            val novaTela = if (estado.tela is UiState.Sucesso) {
+                UiState.Sucesso(filtrar(todos, texto))
+            } else {
+                estado.tela
+            }
+            estado.copy(busca = texto, tela = novaTela)
+        }
     }
 
     fun solicitarExclusao(item: ProdutoItem) = _estado.update { it.copy(pendenteExclusao = item) }

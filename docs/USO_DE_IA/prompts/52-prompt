@@ -1,0 +1,7 @@
+# Prompt 52 — ui/features/principal/PrincipalScreen.kt
+
+Preciso que a busca da tela principal funcione com o novo estado de
+4 opções. Quando a pessoa digitar algo na busca, só filtra a lista
+se a tela já estiver mostrando a lista com sucesso; se estiver
+carregando ou com erro, só guarda o texto digitado, sem mexer no
+resto.
