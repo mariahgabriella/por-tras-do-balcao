@@ -1,0 +1,6 @@
+# Prompt 53 — ui/features/estoque/EstoqueViewModel.kt
+
+Quero trocar o jeito que a tela de estoque sabe se está
+carregando/com erro/com a lista, pelo mesmo padrão de 4 estados que
+já usamos na tela principal. Não mexe no filtro de "só estoque
+baixo" nem no diálogo de mexer na quantidade.
