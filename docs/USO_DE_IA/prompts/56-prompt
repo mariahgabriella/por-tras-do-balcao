@@ -1,0 +1,6 @@
+# Prompt 56 — ui/features/relatorio/RelatorioScreen.kt
+
+Troca a tela de relatório pra usar o novo jeito de 4 opções. Os
+números de total investido, quantidade de produtos e total de
+itens agora precisam ser calculados ali mesmo na tela, a partir da
+lista que vier quando der certo.
