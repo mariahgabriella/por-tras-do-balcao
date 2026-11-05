@@ -8,6 +8,7 @@ import com.example.portrasdobalcao.ui.UiState
 import com.example.portrasdobalcao.util.semAcentoMinusculo
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -52,6 +53,8 @@ class ProdutoViewModel(private val repo: ProdutoRepository) : ViewModel() {
         _estado.update { it.copy(tela = UiState.Carregando) }
         job = viewModelScope.launch {
             try {
+                //delay(2000)
+                //repo.observarItens().collect { lista ->
                 repo.observarItens().collect { lista ->
                     todos = lista
                     val buscaAtual = _estado.value.busca
