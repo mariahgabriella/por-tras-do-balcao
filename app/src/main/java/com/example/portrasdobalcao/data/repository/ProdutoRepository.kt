@@ -1,5 +1,7 @@
 package com.example.portrasdobalcao.data.repository
 
+import kotlinx.coroutines.flow.map
+
 import androidx.room.withTransaction
 import com.example.portrasdobalcao.data.AppDatabase
 import com.example.portrasdobalcao.model.Estoque
@@ -32,6 +34,24 @@ class ProdutoRepository(private val db: AppDatabase) {
                 )
             }
         }
+
+    //fun observarItens(): Flow<List<ProdutoItem>> =
+        //combine(produtoDao.observarTodos(), estoqueDao.listarTodos()) { produtos, estoques ->
+            //val porProduto = estoques.associateBy { it.produtoId }
+            //produtos.map { p ->
+                //val e = porProduto[p.id]
+                //ProdutoItem(
+                    //id = p.id,
+                    //nome = p.nome,
+                    //categoria = p.categoria,
+                    //quantidade = e?.quantidade ?: 0,
+                    //quantidadeMinima = e?.quantidadeMinima ?: 0,
+                    //precoCusto = p.precoCusto,
+                //)
+            //}
+        //}.map { throw java.io.IOException("teste de sabotagem") }
+        //}.map { throw RuntimeException("teste de sabotagem genérico") }
+
 
     suspend fun buscarItem(id: Long): Result<ProdutoItem?> = operacaoSegura {
         val p = produtoDao.buscarPorId(id) ?: return@operacaoSegura null
