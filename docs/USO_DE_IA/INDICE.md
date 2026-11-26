@@ -54,8 +54,6 @@ Cada prompt tem um par: o arquivo em `prompts/` e a saída correspondente em `ou
 | 44 | res/values/strings*.xml (7 arquivos) | Ian e Heitor e Mariah e Pedro | Gemini (Agent Mode) | 2026-10-07 | [prompt](prompts/44-strings-prompt.md) | [saída](outputs/44-strings-output.md) |
 | 45 | app/build.gradle.kts e gradle/libs.versions.toml | Heitor | Gemini (Chat) | 2026-09-30 | [prompt](prompts/45-gradle-room-prompt.md) | [saída](outputs/45-gradle-room-output.md) |
 | 46 | rules.keep e .gitignore (raiz e app/) | Heitor e Mariah | Claude (Chat) | 2026-09-09 | [prompt](prompts/46-gitignore-keep-prompt.md) | [saída](outputs/46-gitignore-keep-output.md) |
-| 59 | res/drawable/ic_launcher_background.xml e ic_launcher_foreground.xml | Pedro | Claude Code | 2026-11-25 |  |  |
-| 60 | res/mipmap-*/ic_launcher*.webp (mdpi, hdpi, xhdpi) | Pedro | Claude Code | 2026-11-25 |  |  |
-| 61 | res/mipmap-*/ic_launcher*.webp (xxhdpi, xxxhdpi) | Pedro | Claude Code | 2026-11-25 |  |  |
-| 62 | app/release/baselineProfiles/ | Ian | Claude Code | 2026-11-25 |  |  |
-| 64 | docs/release-v0.9-beta.md | Ian | Claude Code | 2026-11-25 |  |  |
+| 65 | app/build.gradle.kts e ExampleInstrumentedTest.kt | Heitor | Claude Code | 2026-11-25 |  |  |
+| 66 | .gitignore | Heitor | Claude Code | 2026-11-25 |  |  |
+| 67 | gradle/gradle-daemon-jvm.properties | Heitor | Claude Code | 2026-11-25 |  |  |
