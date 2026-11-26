@@ -57,3 +57,5 @@ Cada prompt tem um par: o arquivo em `prompts/` e a saída correspondente em `ou
 | 59 | res/drawable/ic_launcher_background.xml e ic_launcher_foreground.xml | Pedro | Claude Code | 2026-11-25 |  |  |
 | 60 | res/mipmap-*/ic_launcher*.webp (mdpi, hdpi, xhdpi) | Pedro | Claude Code | 2026-11-25 |  |  |
 | 61 | res/mipmap-*/ic_launcher*.webp (xxhdpi, xxxhdpi) | Pedro | Claude Code | 2026-11-25 |  |  |
+| 62 | app/release/baselineProfiles/ | Ian | Claude Code | 2026-11-25 |  |  |
+| 64 | docs/release-v0.9-beta.md | Ian | Claude Code | 2026-11-25 |  |  |

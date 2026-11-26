@@ -8,49 +8,60 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
+// Esquema escuro da marca: fundo ameixa, texto creme e destaques amarelos.
 private val DarkColorScheme = darkColorScheme(
-    primary = Color(0xFF9B6B84),
-    secondary = AccentGold,
-    tertiary = AccentOrange,
-    background = Color(0xFF17191A),
-    surface = Color(0xFF202426),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color.White,
-    onSurface = Color.White,
-    surfaceVariant = Color(0xFF2A2F31),
-    onSurfaceVariant = Color(0xFFC9C5CA),
-    outlineVariant = Color(0xFF3A3F42),
-    tertiaryContainer = Color(0xFF5A3A1E),
-    onTertiaryContainer = Color(0xFFFFDCC0)
+    primary = BalcaoYellow,
+    onPrimary = BalcaoPlum,
+    primaryContainer = BalcaoDarkSurface,
+    onPrimaryContainer = BalcaoCream,
+    secondary = BalcaoCream,
+    onSecondary = BalcaoPlum,
+    secondaryContainer = BalcaoDarkSurface,
+    onSecondaryContainer = BalcaoCream,
+    tertiary = BalcaoYellow,
+    onTertiary = BalcaoPlum,
+    tertiaryContainer = BalcaoDarkSurface,
+    onTertiaryContainer = BalcaoYellow,
+    background = BalcaoPlum,
+    onBackground = BalcaoCream,
+    surface = BalcaoPlum,
+    onSurface = BalcaoCream,
+    surfaceVariant = BalcaoDarkSurface,
+    onSurfaceVariant = BalcaoDarkMutedText,
+    outlineVariant = BalcaoDarkOutline
 )
 
+// Esquema claro da marca: fundo creme, texto ameixa e destaques amarelos.
 private val LightColorScheme = lightColorScheme(
-    primary = PrimaryMaroon,
-    secondary = AccentGold,
-    tertiary = AccentOrange,
-    background = BackgroundSoft,
-    surface = SurfaceCard,
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = TextPrimary,
-    onSurface = TextPrimary,
-    surfaceVariant = SurfaceContainer,
-    onSurfaceVariant = TextSecondary,
-    outlineVariant = Divider,
-    tertiaryContainer = Color(0xFFFCEBC8),
-    onTertiaryContainer = Color(0xFF5A3510)
+    primary = BalcaoPlum,
+    onPrimary = BalcaoCream,
+    primaryContainer = BalcaoYellow,
+    onPrimaryContainer = BalcaoPlum,
+    secondary = BalcaoYellow,
+    onSecondary = BalcaoPlum,
+    secondaryContainer = BalcaoLightSurface,
+    onSecondaryContainer = BalcaoPlum,
+    tertiary = BalcaoYellow,
+    onTertiary = BalcaoPlum,
+    tertiaryContainer = BalcaoYellow,
+    onTertiaryContainer = BalcaoPlum,
+    background = BalcaoCream,
+    onBackground = BalcaoPlum,
+    surface = BalcaoCream,
+    onSurface = BalcaoPlum,
+    surfaceVariant = BalcaoLightSurface,
+    onSurfaceVariant = BalcaoMutedText,
+    outlineVariant = BalcaoLightOutline
 )
 
+// Tema do app. dynamicColor fica desligado por padrão para que as cores do papel de parede
+// não substituam a identidade visual. Ele só deve ser ligado em testes ou comparações.
 @Composable
 fun PorTrasDoBalcaoTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
