@@ -56,3 +56,4 @@ Cada prompt tem um par: o arquivo em `prompts/` e a saída correspondente em `ou
 | 46 | rules.keep e .gitignore (raiz e app/) | Heitor e Mariah | Claude (Chat) | 2026-09-09 | [prompt](prompts/46-gitignore-keep-prompt.md) | [saída](outputs/46-gitignore-keep-output.md) |
 | 59 | res/drawable/ic_launcher_background.xml e ic_launcher_foreground.xml | Pedro | Claude Code | 2026-11-25 |  |  |
 | 60 | res/mipmap-*/ic_launcher*.webp (mdpi, hdpi, xhdpi) | Pedro | Claude Code | 2026-11-25 |  |  |
+| 61 | res/mipmap-*/ic_launcher*.webp (xxhdpi, xxxhdpi) | Pedro | Claude Code | 2026-11-25 |  |  |
