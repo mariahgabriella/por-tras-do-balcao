@@ -55,3 +55,4 @@ Cada prompt tem um par: o arquivo em `prompts/` e a saída correspondente em `ou
 | 45 | app/build.gradle.kts e gradle/libs.versions.toml | Heitor | Gemini (Chat) | 2026-09-30 | [prompt](prompts/45-gradle-room-prompt.md) | [saída](outputs/45-gradle-room-output.md) |
 | 46 | rules.keep e .gitignore (raiz e app/) | Heitor e Mariah | Claude (Chat) | 2026-09-09 | [prompt](prompts/46-gitignore-keep-prompt.md) | [saída](outputs/46-gitignore-keep-output.md) |
 | 57 | ui/theme/Color.kt e Theme.kt | Mariah | Claude Code | 2026-11-25 |  |  |
+| 58 | loja/icone-512.png | Mariah | Claude Code | 2026-11-25 |  |  |
