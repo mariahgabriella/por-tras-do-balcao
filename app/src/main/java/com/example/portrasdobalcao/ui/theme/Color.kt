@@ -2,23 +2,18 @@ package com.example.portrasdobalcao.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Paleta principal do app "Por Trás do Balcão"
-val Purple80 = Color(0xFF9B6B84)
-val PurpleGrey80 = Color(0xFFF7F4EE)
-val Pink80 = Color(0xFFE9B74D)
+// Paleta oficial do Atrás do Balcão: ameixa (estrutura), amarelo (destaque) e creme (fundo).
+val BalcaoPlum = Color(0xFF412234)
+val BalcaoYellow = Color(0xFFF0C808)
+val BalcaoCream = Color(0xFFFFF1D0)
 
-val Purple40 = Color(0xFF703D57)
-val PurpleGrey40 = Color(0xFF5B5B5B)
-val Pink40 = Color(0xFFDC8B4A)
+// Tons auxiliares derivados das três cores acima, sem criar novas cores de marca.
+val BalcaoMutedText = BalcaoPlum.copy(alpha = 0.78f)
+val BalcaoLightSurface = BalcaoYellow.copy(alpha = 0.14f)
+val BalcaoLightOutline = BalcaoPlum.copy(alpha = 0.18f)
+val BalcaoDarkSurface = BalcaoCream.copy(alpha = 0.10f)
+val BalcaoDarkOutline = BalcaoCream.copy(alpha = 0.22f)
+val BalcaoDarkMutedText = BalcaoCream.copy(alpha = 0.78f)
 
-val BackgroundSoft = Color(0xFFF7F4EE)
-val SurfaceCard = Color(0xFFFFFFFF)
-val SurfaceContainer = Color(0xFFEFE7DE)
-val PrimaryMaroon = Color(0xFF703D57)
-val PrimaryMaroonDark = Color(0xFF4A2538)
-val AccentGold = Color(0xFFE9B74D)
-val AccentOrange = Color(0xFFDC8B4A)
-val TextPrimary = Color(0xFF1D1B20)
-val TextSecondary = Color(0xFF5B5B5B)
-val Divider = Color(0xFFE8E1D8)
+// Verde de sucesso: cor funcional, não é cor de marca.
 val SuccessGreen = Color(0xFF4CAF50)
